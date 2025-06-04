@@ -1,6 +1,6 @@
-# Do it! HTML/CSS/JavaScript 예제 코드
+# HTML/CSS/JavaScript 예제 코드
 
-이 저장소는 도서 **"Do it! HTML/CSS/JavaScript"** 학습을 위한 예제와 실습 파일을 정리한 곳입니다.
+이 저장소는 도서 **"HTML/CSS/JavaScript"** 학습을 위한 예제와 실습 파일을 정리한 곳입니다.
 각 장별로 코드를 직접 실행하며 학습할 수 있도록 구성되어 있습니다.
 
 ## 폴더 구조
