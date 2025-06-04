@@ -1,0 +1,23 @@
+graph TB
+    subgraph "CSS 박스모델"
+        subgraph M["Margin (외부 여백)"]
+            subgraph B["Border (테두리)"]
+                subgraph P["Padding (내부 여백)"]
+                    subgraph C["Content (내용)"]
+                        TEXT["텍스트 또는<br/>다른 요소들"]
+                    end
+                end
+            end
+        end
+    end
+    
+    M --> |"margin: 10px"| M1["다른 요소와의 간격"]
+    B --> |"border: 2px solid"| B1["요소의 경계선"]
+    P --> |"padding: 15px"| P1["내용과 테두리 사이"]
+    C --> |"width, height"| C1["실제 내용 영역"]
+    
+    style M fill:#ffebee
+    style B fill:#e3f2fd
+    style P fill:#e8f5e8
+    style C fill:#fff3e0
+    style TEXT fill:#ffffff
