@@ -9,15 +9,15 @@
 ## 세부 항목
 
 ### 1. 공통 코드 요약
-- `margin`/`padding` 초기화와 `box-sizing` 설정으로 브라우저 기본값을 통일합니다.【F:pr/lab-step4/style.css†L1-L6】
-- 헤더 영역은 전과 동일하게 전면 배경 이미지와 중앙 정렬 구조를 유지합니다.【F:pr/lab-step4/style.css†L26-L137】
-- 배너 및 멤버십 스타일도 앞선 단계와 같은 그라디언트 배경과 텍스트 속성을 사용합니다.【F:pr/lab-step4/style.css†L139-L187】
+- `margin`/`padding` 초기화와 `box-sizing` 설정으로 브라우저 기본값을 통일합니다.([style.css&nbsp;L1-L6](lab-step4/style.css#L1-L6))
+- 헤더 영역은 전과 동일하게 전면 배경 이미지와 중앙 정렬 구조를 유지합니다.([style.css&nbsp;L26-L137](lab-step4/style.css#L26-L137))
+- 배너 및 멤버십 스타일도 앞선 단계와 같은 그라디언트 배경과 텍스트 속성을 사용합니다.([style.css&nbsp;L139-L187](lab-step4/style.css#L139-L187))
 
 ### 2. 선택 가이드 영역
-- `#choice` 내부 문구의 크기와 색상을 조정하여 안내 문장을 돋보이게 합니다.【F:pr/lab-step4/style.css†L189-L194】
-- `.choice-content`는 `flex` 박스를 사용해 카드를 가로로 배치하고, 필요 시 줄바꿈이 가능하도록 `flex-wrap: wrap`을 적용합니다. 카드 사이 여백은 `gap: 30px`으로 맞춥니다.【F:pr/lab-step4/style.css†L195-L200】
-- `.card` 요소는 동일한 비율로 영역을 차지하도록 `flex: 1`을 주고, 그라디언트 배경과 내부 여백을 설정했습니다. 높이는 고정(`height: 300px`)이며, 각 카드의 우측 하단에 원두 이미지를 절대 위치로 배치합니다.【F:pr/lab-step4/style.css†L201-L219】
-- 화면 폭이 768px 이하인 경우 `.card`를 한 줄에 하나씩 세로로 나열하고, 769px 이상 1220px 이하에서는 가로 두 칸 배치 규칙을 적용합니다.【F:pr/lab-step4/style.css†L222-L232】
+- `#choice` 내부 문구의 크기와 색상을 조정하여 안내 문장을 돋보이게 합니다.([style.css&nbsp;L189-L194](lab-step4/style.css#L189-L194))
+- `.choice-content`는 `flex` 박스를 사용해 카드를 가로로 배치하고, 필요 시 줄바꿈이 가능하도록 `flex-wrap: wrap`을 적용합니다. 카드 사이 여백은 `gap: 30px`으로 맞춥니다.([style.css&nbsp;L195-L200](lab-step4/style.css#L195-L200))
+- `.card` 요소는 동일한 비율로 영역을 차지하도록 `flex: 1`을 주고, 그라디언트 배경과 내부 여백을 설정했습니다. 높이는 고정(`height: 300px`)이며, 각 카드의 우측 하단에 원두 이미지를 절대 위치로 배치합니다.([style.css&nbsp;L201-L219](lab-step4/style.css#L201-L219))
+- 화면 폭이 768px 이하인 경우 `.card`를 한 줄에 하나씩 세로로 나열하고, 769px 이상 1220px 이하에서는 가로 두 칸 배치 규칙을 적용합니다.([style.css&nbsp;L222-L232](lab-step4/style.css#L222-L232))
 
 ## 요약
 `lab-step4`의 스타일시트는 기존 레이아웃과 시각적 톤을 유지한 채, 선택 가이드 카드를 추가하여 사용자에게 커피 타입을 쉽게 소개합니다. 카드의 그라디언트 배경과 반응형 배치 규칙을 통해 데스크톱과 모바일 모두에서 일관된 디자인 경험을 제공합니다.
