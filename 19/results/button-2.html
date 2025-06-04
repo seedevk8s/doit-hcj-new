@@ -50,7 +50,7 @@
       const proceedButton = document.querySelector('#proceed');
 
       checkbox.addEventListener('change', function() {
-        proceedButton.classList.toggle('enabled', this.checked);  // 체크했다면 .enabeld 토글
+        proceedButton.classList.toggle('enabled', this.checked);  // 체크했다면 .enabled 토글
         proceedButton.classList.toggle('disabled', !this.checked);  // 체크하지 않았다면 .disabled 토글
         proceedButton.disabled = !this.checked;  // 버튼의 활성화/비활성화 상태
       });
