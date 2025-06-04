@@ -4,7 +4,11 @@
 
 ```mermaid
 graph TD
-    A[기능 정의]\nlab-step1 --> B[설계]\nlab-step2 --> C[개발]\nlab-step3 --> D[테스트]\nlab-step4 --> E[배포]\nlab-step5 --> F[유지보수]\nlab-step6
+    A["기능 정의<br/>lab-step1"] --> B["설계<br/>lab-step2"]
+    B --> C["개발<br/>lab-step3"]
+    C --> D["테스트<br/>lab-step4"]
+    D --> E["배포<br/>lab-step5"]
+    E --> F["유지보수<br/>lab-step6"]
 ```
 
 ## 단계별 설명
