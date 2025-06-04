@@ -7,7 +7,7 @@
 
 /* ---- 전체 적용 ---- */
 body {
-  background-color: #111;
+  background-color: #111; /* 사이트 배경 */
   color: #fff;
 }
 section {
@@ -110,10 +110,10 @@ nav button {
 /* ---- 반응형 (헤더)  ----- */
 @media only screen and (max-width: 768px) {
   .logo {
-    font-size: 20px;
+    font-size: 20px; /* 모바일 로고 크기 */
   }
   nav button {
-    padding: 5px 10px;
+    padding: 5px 10px; /* 버튼 축소 */
   }
   .lang {
     padding: 4px 8px;
@@ -193,7 +193,7 @@ nav button {
   margin-bottom: 30px;
 }
 .choice-content {
-  display: flex;
+  display: flex;            /* 카드 정렬 */
   flex-wrap: wrap;
   align-items: center;
   gap: 30px;
@@ -222,7 +222,7 @@ nav button {
 /* ---- 반응형 (선택 가이드 영역) ---- */
 @media only screen and (max-width: 768px) {
   .card {
-    flex-basis: 100%;
+    flex-basis: 100%; /* 세로 한 줄 배치 */
   }
 }
 @media only screen and (min-width: 769px) and (max-width: 1220px) {

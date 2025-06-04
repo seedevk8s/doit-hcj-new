@@ -1,8 +1,9 @@
 // 페이지 인터랙션을 담당하는 스크립트
 
 // DOM이 준비되면 실행
+// DOMContentLoaded 이벤트 후 실행
 document.addEventListener('DOMContentLoaded', function () {
-  // "자세히 알아보기" 버튼을 클릭하면 membership 섹션으로 스크롤
+  // "자세히 알아보기" 버튼 클릭 시 membership 섹션으로 이동
   const learnMoreBtn = document.getElementById('learn-more-btn');
   const membershipSection = document.getElementById('membership');
   if (learnMoreBtn && membershipSection) {
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // 이메일 구독 폼 제출 시 알림 표시
   const emailForms = document.querySelectorAll('form.add-email');
+  // 각 구독 폼에 제출 이벤트 등록
   emailForms.forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();

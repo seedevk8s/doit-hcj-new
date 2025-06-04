@@ -7,7 +7,7 @@
 
 /* ---- 전체 적용 ---- */
 body {
-  background-color: #111;
+  background-color: #111; /* 배경색 */
   color: #fff;
 }
 section {
@@ -233,7 +233,7 @@ nav button {
 
 /* ----- FAQ 영역 ----- */
 .faq .accordion {
-  width: 100%;
+  width: 100%;       /* FAQ 전체 폭 */
   max-width: 750px;
   margin: 60px auto;
 }
@@ -280,5 +280,5 @@ nav button {
   transform: rotate(-135deg);
 }
 .newsletter {
-  padding: 20px 10%;
+  padding: 20px 10%; /* 구독 섹션 여백 */
 }
