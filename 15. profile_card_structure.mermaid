@@ -1,0 +1,48 @@
+graph TD
+    A[HTML Document] --> B[head]
+    A --> C[body]
+    
+    B --> B1[meta charset]
+    B --> B2[meta viewport]
+    B --> B3[title]
+    B --> B4[style CSS]
+    
+    B4 --> S1[전역 초기화]
+    B4 --> S2[페이지 기본 스타일]
+    B4 --> S3[프로필 카드]
+    B4 --> S4[아바타]
+    B4 --> S5[이름]
+    B4 --> S6[직책]
+    B4 --> S7[설명]
+    B4 --> S8[통계 영역]
+    B4 --> S9[개별 통계]
+    B4 --> S10[소셜 링크]
+    B4 --> S11[호버 효과]
+    
+    C --> C1[페이지 제목]
+    C --> C2[메인 카드]
+    
+    C2 --> D1[원형 아바타]
+    C2 --> D2[사용자 이름]
+    C2 --> D3[직책]
+    C2 --> D4[설명]
+    C2 --> D5[통계 영역]
+    C2 --> D6[소셜 링크]
+    
+    D5 --> E1[팔로워]
+    D5 --> E2[팔로잉]
+    D5 --> E3[프로젝트]
+    
+    E1 --> F1[324]
+    E1 --> F2[팔로워 라벨]
+    
+    D6 --> G1[GitHub]
+    D6 --> G2[LinkedIn]
+    D6 --> G3[이메일]
+    D6 --> G4[트위터]
+    
+    style A fill:#e1f5fe
+    style C2 fill:#f3e5f5
+    style B4 fill:#fff3e0
+    style D5 fill:#e8f5e8
+    style D6 fill:#fce4ec
