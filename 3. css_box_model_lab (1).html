@@ -1,0 +1,532 @@
+        /* 퀴즈 결과 표시 영역 */
+        .result {
+            margin-top: 15px;        /* 위쪽 외부 여백 15px */
+            padding: 10px;           /* 내부 여백 10px */
+            border-radius: 5px;      /* 모서리를 5px만큼 둥글게 */
+            display: none;           /* 기본적으로 숨김 (JavaScript로 표시) */
+        }
+        
+        /* 정답일 때의 스타일 */
+        .correct {
+            background-color: #d4edda; /* 연한 녹색 배경 */
+            color: #155724;          /* 진한 녹색 텍스트 */
+            border: 1px solid #c3e6cb; /* 녹색 테두리 */
+        }
+        
+        /* 오답일 때의 스타일 */
+        .incorrect {
+            background-color: #f8d7da; /* 연한 빨간색 배경 */
+            color: #721c24;          /* 진한 빨간색 텍스트 */
+            border: 1px solid #f5c6cb; /* 빨간색 테두리 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 전체 내용을 감싸는 메인 컨테이너 -->
+    <div class="container">
+        <!-- 페이지 상단 헤더 -->
+        <div class="header">
+            <h1>🎯<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 박스모델 실습 Lab</title>
+    <style>
+        /* 전체 초기화 - 모든 요소의 기본 마진, 패딩 제거 */
+        * {
+            margin: 0;              /* 모든 요소의 외부 여백 제거 */
+            padding: 0;             /* 모든 요소의 내부 여백 제거 */
+            box-sizing: border-box; /* 박스 크기 계산에 padding, border 포함 */
+        }
+        
+        /* 전체 페이지 기본 스타일링 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 웹폰트 우선순위 설정 */
+            line-height: 1.6;                                              /* 줄간격을 1.6배로 설정 (가독성 향상) */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* 대각선 그라데이션 배경 */
+            padding: 20px;          /* 페이지 전체에 20px 내부 여백 */
+            min-height: 100vh;      /* 최소 높이를 화면 전체 높이로 설정 */
+        }
+        
+        /* 메인 컨테이너 - 전체 내용을 감싸는 박스 */
+        .container {
+            max-width: 1200px;      /* 최대 너비 제한 (큰 화면에서 너무 넓어지지 않도록) */
+            margin: 0 auto;         /* 좌우 자동 마진으로 중앙 정렬 */
+            background: white;      /* 흰색 배경 */
+            border-radius: 15px;    /* 모서리를 15px만큼 둥글게 */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); /* 그림자 효과 (x y blur color) */
+            overflow: hidden;       /* 자식 요소가 컨테이너를 넘지 않도록 */
+        }
+        
+        /* 페이지 상단 헤더 영역 */
+        .header {
+            background: linear-gradient(135deg, #4CAF50, #45a049); /* 녹색 그라데이션 */
+            color: white;           /* 텍스트 색상을 흰색으로 */
+            padding: 30px;          /* 상하좌우 30px 내부 여백 */
+            text-align: center;     /* 텍스트 중앙 정렬 */
+        }
+        
+        /* 헤더 내부의 제목 스타일 */
+        .header h1 {
+            font-size: 2.5em;       /* 글자 크기를 기본 크기의 2.5배로 */
+            margin-bottom: 10px;    /* 아래쪽에 10px 외부 여백 */
+        }
+        
+        /* 메인 콘텐츠 영역 */
+        .content {
+            padding: 40px;          /* 상하좌우 40px 내부 여백 */
+        }
+        
+        /* 각 실습 섹션을 감싸는 박스 */
+        .lab-section {
+            margin-bottom: 50px;    /* 아래쪽에 50px 외부 여백 (섹션 간 간격) */
+            border: 2px solid #e0e0e0; /* 2px 두께의 회색 테두리 */
+            border-radius: 10px;    /* 모서리를 10px만큼 둥글게 */
+            overflow: hidden;       /* 자식 요소가 둥근 모서리를 넘지 않도록 */
+        }
+        
+        /* 실습 섹션의 헤더 (제목 부분) */
+        .lab-header {
+            background: #f5f5f5;    /* 연한 회색 배경 */
+            padding: 20px;          /* 상하좌우 20px 내부 여백 */
+            border-bottom: 2px solid #e0e0e0; /* 아래쪽에 2px 회색 테두리 */
+        }
+        
+        /* 실습 섹션 제목 스타일 */
+        .lab-header h2 {
+            color: #333;            /* 진한 회색 텍스트 */
+            font-size: 1.5em;       /* 글자 크기를 1.5배로 */
+        }
+        
+        /* 실습 섹션의 내용 부분 */
+        .lab-content {
+            padding: 30px;          /* 상하좌우 30px 내부 여백 */
+        }
+        
+        /* 실습 1: 기본 박스모델 시연용 박스 */
+        .basic-box {
+            width: 200px;           /* 콘텐츠 영역 너비 200px */
+            height: 100px;          /* 콘텐츠 영역 높이 100px */
+            background-color: #ffeb3b; /* 노란색 배경 */
+            border: 5px solid #ff9800; /* 5px 두께의 주황색 테두리 */
+            padding: 20px;          /* 상하좌우 20px 내부 여백 */
+            margin: 20px;           /* 상하좌우 20px 외부 여백 */
+            text-align: center;     /* 텍스트 중앙 정렬 */
+            font-weight: bold;      /* 글자를 굵게 */
+            display: inline-block;  /* 인라인 요소처럼 나란히 배치되지만 박스 속성 유지 */
+        }
+        
+        /* 실습 2: content-box 모드 (기본값) */
+        .content-box {
+            box-sizing: content-box; /* 기본값: width에 padding, border 미포함 */
+            width: 200px;           /* 콘텐츠 영역만 200px */
+            padding: 20px;          /* 내부 여백 20px (실제 크기에 추가됨) */
+            border: 5px solid #2196F3; /* 5px 테두리 (실제 크기에 추가됨) */
+            background-color: #E3F2FD; /* 연한 파란색 배경 */
+            margin: 20px;           /* 외부 여백 20px */
+            display: inline-block;  /* 나란히 배치 */
+            text-align: center;     /* 텍스트 중앙 정렬 */
+        }
+        
+        /* 실습 2: border-box 모드 (권장) */
+        .border-box {
+            box-sizing: border-box; /* width에 padding, border 포함 */
+            width: 200px;           /* 전체 박스가 200px (padding, border 포함) */
+            padding: 20px;          /* 내부 여백 20px */
+            border: 5px solid #F44336; /* 5px 빨간색 테두리 */
+            background-color: #FFEBEE; /* 연한 빨간색 배경 */
+            margin: 20px;           /* 외부 여백 20px */
+            display: inline-block;  /* 나란히 배치 */
+            text-align: center;     /* 텍스트 중앙 정렬 */
+        }
+        
+        /* 실습 3: 마진 예제 (외부 여백) */
+        .margin-example {
+            background-color: #4CAF50; /* 녹색 배경 */
+            margin: 30px;           /* 외부 여백 30px (배경색이 적용되지 않는 영역) */
+            padding: 0;             /* 내부 여백 없음 */
+            color: white;           /* 흰색 텍스트 */
+            text-align: center;     /* 텍스트 중앙 정렬 */
+            padding: 10px;          /* 텍스트 가독성을 위한 약간의 내부 여백 */
+        }
+        
+        /* 실습 3: 패딩 예제 (내부 여백) */
+        .padding-example {
+            background-color: #9C27B0; /* 보라색 배경 */
+            margin: 0;              /* 외부 여백 없음 */
+            padding: 30px;          /* 내부 여백 30px (배경색이 적용되는 영역) */
+            color: white;           /* 흰색 텍스트 */
+            text-align: center;     /* 텍스트 중앙 정렬 */
+        }
+        
+        /* 실습 4: 마진 상쇄 현상 - 첫 번째 박스 */
+        .margin-collapse-1 {
+            background-color: #FF5722; /* 주황색 배경 */
+            padding: 20px;          /* 내부 여백 20px */
+            margin-bottom: 30px;    /* 아래쪽 외부 여백 30px */
+            color: white;           /* 흰색 텍스트 */
+            text-align: center;     /* 텍스트 중앙 정렬 */
+        }
+        
+        /* 실습 4: 마진 상쇄 현상 - 두 번째 박스 */
+        .margin-collapse-2 {
+            background-color: #607D8B; /* 청회색 배경 */
+            padding: 20px;          /* 내부 여백 20px */
+            margin-top: 50px;       /* 위쪽 외부 여백 50px */
+            color: white;           /* 흰색 텍스트 */
+            text-align: center;     /* 텍스트 중앙 정렬 */
+            /* 주의: 30px + 50px = 80px가 아니라 더 큰 값인 50px로 상쇄됨 */
+        }
+        
+        /* 실습 5: 실무에서 사용하는 카드 컴포넌트 */
+        .card {
+            background: white;      /* 흰색 배경 */
+            border-radius: 12px;    /* 모서리를 12px만큼 둥글게 */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 그림자 효과 */
+            margin: 20px;           /* 카드 간 간격 20px */
+            padding: 25px;          /* 카드 내부 여백 25px */
+            border: 1px solid #e0e0e0; /* 1px 회색 테두리 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* 호버 효과를 위한 애니메이션 */
+            display: inline-block;  /* 카드들이 나란히 배치되도록 */
+            width: 300px;           /* 카드 너비 300px */
+            vertical-align: top;    /* 카드들의 상단을 맞춤 */
+        }
+        
+        /* 카드에 마우스를 올렸을 때의 효과 */
+        .card:hover {
+            transform: translateY(-5px); /* 위로 5px 이동 */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* 그림자를 더 진하게 */
+        }
+        
+        /* 카드 헤더 영역 (제목 부분) */
+        .card-header {
+            border-bottom: 2px solid #f0f0f0; /* 아래쪽에 구분선 */
+            padding-bottom: 15px;   /* 아래쪽 내부 여백 15px */
+            margin-bottom: 15px;    /* 아래쪽 외부 여백 15px */
+        }
+        
+        /* 카드의 주 제목 */
+        .card-title {
+            font-size: 1.3em;       /* 글자 크기 1.3배 */
+            color: #333;            /* 진한 회색 */
+            margin-bottom: 5px;     /* 아래쪽 외부 여백 5px */
+        }
+        
+        /* 카드의 부 제목 */
+        .card-subtitle {
+            color: #666;            /* 연한 회색 */
+            font-size: 0.9em;       /* 글자 크기 0.9배 (작게) */
+        }
+        
+        /* 카드의 본문 내용 */
+        .card-content {
+            color: #555;            /* 중간 회색 */
+            line-height: 1.6;       /* 줄간격 1.6배 */
+        }
+        
+        /* 개발자 도구 사용법 안내 박스 */
+        .dev-tools-guide {
+            background: #1a1a1a;   /* 검은색 배경 (터미널 느낌) */
+            color: #00ff00;         /* 녹색 글자 (터미널 느낌) */
+            padding: 20px;          /* 내부 여백 20px */
+            border-radius: 8px;     /* 모서리를 8px만큼 둥글게 */
+            font-family: 'Courier New', monospace; /* 고정폭 폰트 사용 */
+            margin: 20px 0;         /* 위아래 외부 여백 20px */
+        }
+        
+        /* 중요한 정보를 강조하는 박스 */
+        .highlight {
+            background-color: #fff3cd; /* 연한 노란색 배경 */
+            border: 1px solid #ffeaa7; /* 노란색 테두리 */
+            padding: 15px;          /* 내부 여백 15px */
+            border-radius: 8px;     /* 모서리를 8px만큼 둥글게 */
+            margin: 15px 0;         /* 위아래 외부 여백 15px */
+        }
+        
+        /* 퀴즈 섹션 전체 박스 */
+        .quiz-section {
+            background: #e8f4fd;     /* 연한 파란색 배경 */
+            border: 2px solid #2196F3; /* 파란색 테두리 */
+            border-radius: 10px;     /* 모서리를 10px만큼 둥글게 */
+            padding: 25px;           /* 내부 여백 25px */
+            margin: 30px 0;          /* 위아래 외부 여백 30px */
+        }
+        
+        /* 퀴즈 질문 텍스트 */
+        .quiz-question {
+            font-weight: bold;       /* 굵은 글씨 */
+            margin-bottom: 10px;     /* 아래쪽 외부 여백 10px */
+            color: #1976D2;          /* 진한 파란색 */
+        }
+        
+        /* 퀴즈 답변 버튼들 */
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* 그라데이션 배경 */
+            color: white;            /* 흰색 텍스트 */
+            border: none;            /* 테두리 없음 */
+            padding: 12px 25px;      /* 내부 여백 (위아래 12px, 좌우 25px) */
+            border-radius: 25px;     /* 모서리를 25px만큼 둥글게 (둥근 버튼) */
+            cursor: pointer;         /* 마우스 포인터를 손가락 모양으로 */
+            font-size: 16px;         /* 글자 크기 16px */
+            margin: 10px 5px;        /* 버튼 간격 (위아래 10px, 좌우 5px) */
+            transition: transform 0.2s ease; /* 호버 효과를 위한 애니메이션 */
+        }
+        
+        /* 버튼에 마우스를 올렸을 때 */
+        button:hover {
+            transform: scale(1.05);  /* 크기를 5% 확대 */
+        }
+        
+        /* 퀴즈 결과 표시 영역 */
+        .result {
+            margin-top: 15px;        /* 위쪽 외부 여백 15px */
+            padding: 10px;           /* 내부 여백 10px */
+            border-radius: 5px;      /* 모서리를 5px만큼 둥글게 */
+            display: none;           /* 기본적으로 숨김 (JavaScript로 표시) */
+        }
+        
+        /* 정답일 때의 스타일 */
+        .correct {
+            background-color: #d4edda; /* 연한 녹색 배경 */
+            color: #155724;          /* 진한 녹색 텍스트 */
+            border: 1px solid #c3e6cb; /* 녹색 테두리 */
+        }
+        
+        /* 오답일 때의 스타일 */
+        .incorrect {
+            background-color: #f8d7da; /* 연한 빨간색 배경 */
+            color: #721c24;          /* 진한 빨간색 텍스트 */
+            border: 1px solid #f5c6cb; /* 빨간색 테두리 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 전체 내용을 감싸는 메인 컨테이너 -->
+    <div class="container">
+        <!-- 페이지 상단 헤더 -->
+        <div class="header">
+            <h1>🎯 CSS 박스모델 실습 Lab</h1>
+            <p>실제 코드로 배우는 박스모델의 모든 것</p>
+        </div>
+        
+        <!-- 메인 콘텐츠 영역 -->
+        <div class="content">
+            <!-- 실습 1: 기본 박스모델 구성요소 -->
+            <div class="lab-section">
+                <!-- 실습 섹션 헤더 -->
+                <div class="lab-header">
+                    <h2>🔥 실습 1: 기본 박스모델 구성요소</h2>
+                </div>
+                <!-- 실습 섹션 내용 -->
+                <div class="lab-content">
+                    <p><strong>아래 박스를 F12로 검사해보세요!</strong></p>
+                    <!-- 박스모델 시연용 박스 (width: 200px + padding: 40px + border: 10px = 실제크기: 250px) -->
+                    <div class="basic-box">
+                        Content 영역<br>
+                        (200px × 100px)
+                    </div>
+                    
+                    <!-- 중요 정보 강조 박스 -->
+                    <div class="highlight">
+                        <strong>🔍 확인해보세요:</strong><br>
+                        - 실제 박스 크기 = 200px + 40px(padding) + 10px(border) = 250px<br>
+                        - 개발자도구에서 각 영역이 다른 색으로 표시됨
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 실습 2: box-sizing 속성 비교 -->
+            <div class="lab-section">
+                <div class="lab-header">
+                    <h2>📐 실습 2: box-sizing 속성 비교</h2>
+                </div>
+                <div class="lab-content">
+                    <p><strong>같은 width: 200px인데 실제 크기가 다릅니다!</strong></p>
+                    
+                    <!-- content-box: width에 padding, border가 추가됨 (실제 크기: 250px) -->
+                    <div class="content-box">
+                        content-box<br>
+                        (기본값)
+                    </div>
+                    
+                    <!-- border-box: width에 padding, border가 포함됨 (실제 크기: 200px) -->
+                    <div class="border-box">
+                        border-box<br>
+                        (권장)
+                    </div>
+                    
+                    <div class="highlight">
+                        <strong>💡 실무팁:</strong> border-box가 더 직관적이라 실무에서 많이 사용합니다!
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 실습 3: 마진과 패딩의 차이점 -->
+            <div class="lab-section">
+                <div class="lab-header">
+                    <h2>🎨 실습 3: Margin vs Padding</h2>
+                </div>
+                <div class="lab-content">
+                    <p><strong>배경색이 어디까지 적용되는지 확인해보세요!</strong></p>
+                    
+                    <!-- 마진: 외부 여백이므로 배경색이 적용되지 않음 -->
+                    <div class="margin-example">
+                        마진 30px (배경색이 안 보임)
+                    </div>
+                    
+                    <!-- 패딩: 내부 여백이므로 배경색이 적용됨 -->
+                    <div class="padding-example">
+                        패딩 30px (배경색이 보임)
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 실습 4: 마진 상쇄 현상 이해하기 -->
+            <div class="lab-section">
+                <div class="lab-header">
+                    <h2>⚠️ 실습 4: 마진 상쇄 현상</h2>
+                </div>
+                <div class="lab-content">
+                    <p><strong>30px + 50px = 80px가 아니라 50px입니다!</strong></p>
+                    
+                    <!-- 첫 번째 박스: 아래쪽 마진 30px -->
+                    <div class="margin-collapse-1">
+                        첫 번째 박스 (margin-bottom: 30px)
+                    </div>
+                    
+                    <!-- 두 번째 박스: 위쪽 마진 50px, 실제 간격은 50px (더 큰 값으로 상쇄) -->
+                    <div class="margin-collapse-2">
+                        두 번째 박스 (margin-top: 50px)
+                    </div>
+                    
+                    <div class="highlight">
+                        <strong>🚨 주의:</strong> 세로 마진은 더 큰 값으로 합쳐집니다!
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 실습 5: 실무에서 활용하는 카드 컴포넌트 -->
+            <div class="lab-section">
+                <div class="lab-header">
+                    <h2>💼 실습 5: 실무 카드 컴포넌트</h2>
+                </div>
+                <div class="lab-content">
+                    <p><strong>실제 웹사이트에서 볼 수 있는 카드 디자인입니다!</strong></p>
+                    
+                    <!-- 첫 번째 카드: 구인공고 예시 -->
+                    <div class="card">
+                        <!-- 카드 헤더 (제목 영역) -->
+                        <div class="card-header">
+                            <div class="card-title">프론트엔드 개발자</div>
+                            <div class="card-subtitle">신입/경력 모집</div>
+                        </div>
+                        <!-- 카드 본문 내용 -->
+                        <div class="card-content">
+                            HTML, CSS, JavaScript를 활용한 웹 개발 업무를 담당하실 분을 모집합니다. 박스모델을 완벽히 이해하신 분 우대!
+                        </div>
+                    </div>
+                    
+                    <!-- 두 번째 카드: 축하 메시지 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">박스모델 마스터</div>
+                            <div class="card-subtitle">축하합니다! 🎉</div>
+                        </div>
+                        <div class="card-content">
+                            이제 여러분은 CSS 박스모델을 완벽히 이해했습니다. 다음은 Flexbox와 Grid를 학습해보세요!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 개발자 도구 활용법 안내 -->
+            <div class="lab-section">
+                <div class="lab-header">
+                    <h2>🛠️ 개발자 도구 활용법</h2>
+                </div>
+                <div class="lab-content">
+                    <!-- 터미널 스타일의 안내 박스 -->
+                    <div class="dev-tools-guide">
+                        F12 → Elements → 요소 선택 → Computed 탭
+                        <br>박스모델이 시각적으로 표시됩니다!
+                        <br>
+                        <br>🟦 파란색: Content
+                        <br>🟩 초록색: Padding  
+                        <br>🟨 노란색: Border
+                        <br>🟧 주황색: Margin
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 학습 이해도 체크를 위한 퀴즈 섹션 -->
+            <div class="quiz-section">
+                <h2>🧠 이해도 체크 퀴즈</h2>
+                
+                <!-- 첫 번째 퀴즈: 박스 크기 계산 -->
+                <div class="quiz-question">
+                    Q. width: 100px, padding: 20px, border: 5px인 요소의 실제 너비는?
+                </div>
+                <!-- 정답: 150px (100 + 20*2 + 5*2) -->
+                <button onclick="showAnswer(1, '150px', true)">150px</button>
+                <button onclick="showAnswer(1, '100px', false)">100px</button>
+                <button onclick="showAnswer(1, '125px', false)">125px</button>
+                
+                <!-- 첫 번째 퀴즈 결과 표시 영역 -->
+                <div id="result1" class="result"></div>
+                
+                <!-- 두 번째 퀴즈: box-sizing 속성 -->
+                <div class="quiz-question" style="margin-top: 30px;">
+                    Q. 실무에서 권장하는 box-sizing 값은?
+                </div>
+                <!-- 정답: border-box -->
+                <button onclick="showAnswer(2, 'border-box', true)">border-box</button>
+                <button onclick="showAnswer(2, 'content-box', false)">content-box</button>
+                <button onclick="showAnswer(2, 'padding-box', false)">padding-box</button>
+                
+                <!-- 두 번째 퀴즈 결과 표시 영역 -->
+                <div id="result2" class="result"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript 코드 영역 -->
+    <script>
+        /**
+         * 퀴즈 답변을 확인하고 결과를 표시하는 함수
+         * @param {number} questionNum - 퀴즈 번호 (1 또는 2)
+         * @param {string} answer - 사용자가 선택한 답변
+         * @param {boolean} isCorrect - 정답 여부
+         */
+        function showAnswer(questionNum, answer, isCorrect) {
+            // 해당 퀴즈의 결과 표시 영역을 찾음
+            const resultDiv = document.getElementById(`result${questionNum}`);
+            resultDiv.style.display = 'block'; // 결과 영역을 보이게 함
+            
+            if (isCorrect) {
+                // 정답인 경우
+                resultDiv.className = 'result correct'; // 정답 스타일 적용
+                resultDiv.innerHTML = `✅ 정답입니다! <strong>${answer}</strong>`;
+                
+                // 추가 설명 제공
+                if (questionNum === 1) {
+                    resultDiv.innerHTML += '<br>계산: 100px(content) + 40px(padding) + 10px(border) = 150px';
+                } else {
+                    resultDiv.innerHTML += '<br>border-box는 크기 계산이 직관적이어서 실무에서 선호됩니다.';
+                }
+            } else {
+                // 오답인 경우
+                resultDiv.className = 'result incorrect'; // 오답 스타일 적용
+                resultDiv.innerHTML = `❌ 틀렸습니다. 다시 생각해보세요!`;
+            }
+        }
+        
+        // 페이지가 완전히 로드되었을 때 실행되는 이벤트 리스너
+        window.addEventListener('load', function() {
+            // 콘솔에 환영 메시지 출력
+            console.log('🎯 CSS 박스모델 Lab에 오신 것을 환영합니다!');
+            console.log('💡 F12를 눌러 개발자 도구를 열고 요소들을 검사해보세요!');
+        });
+    </script>
+</body>
+</html>
