@@ -1,0 +1,51 @@
+graph TD
+    A[HTML Document] --> B[head]
+    A --> C[body]
+
+    B --> B1[meta charset]
+    B --> B2[meta viewport]
+    B --> B3[title]
+    B --> B4[style]
+
+    B4 --> S1[* reset]
+    B4 --> S2[body]
+    B4 --> S3[.page-title]
+    B4 --> S4[.profile-card]
+    B4 --> S5[.profile-avatar]
+    B4 --> S6[.profile-name]
+    B4 --> S7[.profile-title]
+    B4 --> S8[.profile-description]
+    B4 --> S9[.profile-stats]
+    B4 --> S10[.stat]
+    B4 --> S11[.stat-number]
+    B4 --> S12[.stat-label]
+    B4 --> S13[.social-links]
+    B4 --> S14[.social-link]
+
+    C --> C1[h1.page-title]
+    C --> C2[div.profile-card]
+
+    C2 --> D1[div.profile-avatar]
+    C2 --> D2[h2.profile-name]
+    C2 --> D3[p.profile-title]
+    C2 --> D4[p.profile-description]
+    C2 --> D5[div.profile-stats]
+    C2 --> D6[div.social-links]
+
+    D5 --> E1[div.stat]
+    D5 --> E2[div.stat]
+    D5 --> E3[div.stat]
+
+    E1 --> F1[span.stat-number]
+    E1 --> F2[span.stat-label]
+
+    D6 --> G1[a.social-link]
+    D6 --> G2[a.social-link]
+    D6 --> G3[a.social-link]
+    D6 --> G4[a.social-link]
+
+    style A fill:#e1f5fe
+    style C2 fill:#f3e5f5
+    style B4 fill:#fff3e0
+    style D5 fill:#e8f5e8
+    style D6 fill:#fce4ec
