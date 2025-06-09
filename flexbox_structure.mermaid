@@ -1,0 +1,41 @@
+graph TD
+    A[플렉스박스 레이아웃] --> B[플렉스 컨테이너<br/>display: flex]
+    A --> C[플렉스 아이템<br/>컨테이너의 자식 요소들]
+    
+    B --> D[주축 Main Axis]
+    B --> E[교차축 Cross Axis]
+    
+    D --> F[flex-direction<br/>주축 방향 설정]
+    F --> F1[row: 가로 →]
+    F --> F2[row-reverse: 가로 ←]
+    F --> F3[column: 세로 ↓]
+    F --> F4[column-reverse: 세로 ↑]
+    
+    D --> G[justify-content<br/>주축 정렬]
+    G --> G1[flex-start: 시작점]
+    G --> G2[flex-end: 끝점]
+    G --> G3[center: 중앙]
+    G --> G4[space-between: 양끝+균등분배]
+    G --> G5[space-around: 균등분배]
+    G --> G6[space-evenly: 완전균등분배]
+    
+    E --> H[align-items<br/>교차축 정렬]
+    H --> H1[flex-start: 시작점]
+    H --> H2[flex-end: 끝점]
+    H --> H3[center: 중앙]
+    H --> H4[baseline: 기준선]
+    H --> H5[stretch: 늘림]
+    
+    B --> I[flex-wrap<br/>줄바꿈 설정]
+    I --> I1[nowrap: 한줄]
+    I --> I2[wrap: 여러줄]
+    I --> I3[wrap-reverse: 역순 여러줄]
+    
+    B --> J[align-content<br/>여러줄 교차축 정렬]
+    B --> K[gap<br/>아이템 간격]
+    
+    C --> L[align-self<br/>개별 교차축 정렬]
+    C --> M[flex-grow<br/>확장 비율]
+    C --> N[flex-shrink<br/>축소 비율]
+    C --> O[flex-basis<br/>기본 크기]
+    C --> P[margin: auto<br/>자동 마진]
