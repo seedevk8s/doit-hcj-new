@@ -1,0 +1,21 @@
+flowchart TD
+    F1["flex-1\ndirection"]
+    F2["flex-2\nwrap"]
+    F3["flex-3\nflow"]
+    F4["flex-4\njustify-content"]
+    F5["flex-5\nalign-items"]
+    F6["flex-6\nalign-self"]
+    F7["flex-7\nalign-content"]
+    F8["flex-8\ngap"]
+    F9["flex-9\nflex-basis"]
+    F10["flex-10\nflex-grow"]
+    F11["flex-11\nflex-shrink"]
+    MARGIN["margin-1~3"]
+    CENTER["center.html"]
+    TEAM["our-team.html"]
+    QUIZ["quiz-1.html"]
+    SOL["sol-1.html"]
+
+    F1 --> F2 --> F3 --> F4 --> F5 --> F6 --> F7 --> F8 --> F9 --> F10 --> F11
+    F11 --> MARGIN
+    MARGIN --> CENTER --> TEAM --> QUIZ --> SOL
