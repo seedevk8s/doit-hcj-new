@@ -1,0 +1,20 @@
+```mermaid
+flowchart LR
+  subgraph opt1[flex-direction: row]
+    A1[box 1] --> A2[box 2] --> A3[box 3]
+  end
+
+  subgraph opt2[flex-direction: row-reverse]
+    B3[box 3] --> B2[box 2] --> B1[box 1]
+  end
+
+  subgraph opt3[flex-direction: column]
+    C1[box 1]:::col --> C2[box 2]:::col --> C3[box 3]:::col
+  end
+
+  subgraph opt4[flex-direction: column-reverse]
+    D3[box 3]:::col --> D2[box 2]:::col --> D1[box 1]:::col
+  end
+
+  classDef col direction TB;
+```
